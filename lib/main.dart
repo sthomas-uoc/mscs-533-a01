@@ -38,7 +38,7 @@ class _ConverterPage extends State<ConverterPage> {
   // List of from units and possible target units
   var _fromMeasures = [
     Measure('feet', ['meter']),
-    Measure('meter', ['feet']),
+    Measure('meter', ['feet', 'yard', 'mile']),
     Measure('kelvin', ['fahrenheit']),
     Measure('fahrenheit', ['kelvin']),
     Measure('kilogram', ['pound']),
@@ -53,7 +53,11 @@ class _ConverterPage extends State<ConverterPage> {
   // Additional targets and formulae can be added with ease
   var _conversions = {
     'feet': {'meter': MultiplyEvaluator(0.3048)},
-    'meter': {'feet': MultiplyEvaluator(3.28084)},
+    'meter': {
+      'feet': MultiplyEvaluator(3.28084),
+      'yard': MultiplyEvaluator(1.09361),
+      'mile': MultiplyEvaluator(0.000621371),
+    },
     'kelvin': {
       'fahrenheit': CustomEvaluator([
         SubtractEvaluator(273.15),
@@ -77,7 +81,7 @@ class _ConverterPage extends State<ConverterPage> {
   };
 
   // List of to units for the selected from unit. Initially set to the possible targets for the default from unit
-  var _toMeasures = ['feet'];
+  var _toMeasures = ['feet', 'yard', 'mile'];
 
   // String to store the formatted display text for the conversion output
   String _convertedValueDisplay = "";
